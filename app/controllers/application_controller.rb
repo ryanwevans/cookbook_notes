@@ -7,7 +7,17 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
+  get '/' do
+    erb :index
+  end
+
   helpers do
+    def redirect_unless_logged_in
+      unless logged_in?
+        redirect '/users/login'
+      end
+    end
+
     def logged_in?
       !!session[:id]
     end
