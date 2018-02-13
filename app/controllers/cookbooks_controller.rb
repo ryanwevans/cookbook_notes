@@ -49,4 +49,14 @@ class CookbooksController < ApplicationController
     redirect '/cookbooks'
   end
 
+  # delete a specific cookbook from all cookbooks
+  delete '/cookbooks/:id' do
+    redirect_unless_logged_in
+    @cookbook = Cookbook.find(params[:id])
+    if current_user.id == @cookbook.user_id
+      @cookbook.delete
+    end
+    redirect '/cookbooks'
+  end
+
 end
