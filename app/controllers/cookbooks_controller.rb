@@ -23,6 +23,9 @@ class CookbooksController < ApplicationController
   post '/cookbooks' do
     redirect_unless_logged_in
     @cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
+    if !params[:note_id].empty?
+      @cookbook.note_id = params[:note_id]
+    end
     @cookbook.user_id = current_user.id
     @cookbook.save
     redirect '/cookbooks'
@@ -39,7 +42,9 @@ class CookbooksController < ApplicationController
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
     @cookbook.cookbook_name = params[:cookbook_name]
-    @cookbook.note_id = params[:note_id]
+    if !params[:note_id].empty?
+      @cookbook.note_id = params[:note_id]
+    end
     @cookbook.save
     redirect '/cookbooks'
   end
