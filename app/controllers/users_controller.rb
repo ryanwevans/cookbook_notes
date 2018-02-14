@@ -7,7 +7,14 @@ class UsersController < ApplicationController
 
   post '/signup' do
     redirect_unless_logged_in
-    redirect '/cookbooks/cookbooks'
+    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+    if @user && @user.save
+      session[:id] = @user.id
+      redirect '/cookbooks/cookbooks'
+    else
+      redirect '/login'
+    end
+
   end
 
   get '/login' do
