@@ -12,25 +12,31 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect '/cookbooks/cookbooks'
     else
-      redirect '/login'
+      redirect '/signup'
     end
 
   end
 
   get '/login' do
     redirect_unless_logged_in
-
+    erb :'users/login'
   end
 
   post '/login' do
     redirect_unless_logged_in
-
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:id] = @user.id
+      redirect '/cookbooks/cookbooks'
+    else
+      redirect '/users/login'
+    end
   end
 
   get '/logout' do
     redirect_unless_logged_in
     session.clear
-    redirect '/login'
+    redirect '/users/login'
   end
 
 end
