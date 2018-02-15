@@ -6,7 +6,7 @@
   </head>
   <body>
     <% yield %>
-    <% if logged_in? %>
+    <% if logged_in? || current_page?('users/login') %>
     <form action="/logout" method="get">
       <button type="submit" name="logout">Logout</button>
     </form>
