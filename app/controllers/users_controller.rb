@@ -5,14 +5,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     if @user && @user.save
       session[:id] = @user.id
-      redirect '/cookbooks/cookbooks'
+      redirect '/cookbooks'
     else
-      redirect '/signup'
+      erb :'/users/create_user'
     end
-
   end
 
   get '/login' do
@@ -23,16 +22,16 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect '/cookbooks/cookbooks'
+      redirect '/cookbooks'
     else
-      redirect '/users/login'
+      redirect '/login'
     end
   end
 
   get '/logout' do
     redirect_unless_logged_in
     session.clear
-    redirect '/users/login'
+    redirect '/login'
   end
 
 end

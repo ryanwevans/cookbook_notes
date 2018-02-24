@@ -2,21 +2,21 @@ class CookbooksController < ApplicationController
 
   # view all cookbooks
   get '/cookbooks' do
-    redirect_unless_logged_in
-    erb ':/cookbooks/cookbooks'
+    # redirect_unless_logged_in
+    erb :'/cookbooks/cookbooks'
   end
 
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
-    erb ':/cookbooks/show_cookbook'
+    erb :'/cookbooks/show_cookbook'
   end
 
   # view form to create new cookbook
   get '/cookbooks/new' do
     redirect_unless_logged_in
-    erb ':/cookbooks/create_cookbook'
+    erb :'/cookbooks/create_cookbook'
   end
 
   # post new cookbook from form to db of all cookbooks
@@ -28,13 +28,13 @@ class CookbooksController < ApplicationController
     end
     @cookbook.user_id = current_user.id
     @cookbook.save
-    redirect '/cookbooks'
+    redirect '/cookbooks/cookbooks'
   end
 
   # view form to edit a specific cookbook
   get '/cookbooks/:id/edit' do
     redirect_unless_logged_in
-    erb ':/cookbooks/edit_cookbook'
+    erb :'/cookbooks/edit_cookbook'
   end
 
   # patch updated cookbook info from edit form to specific cookbook
@@ -46,7 +46,7 @@ class CookbooksController < ApplicationController
       @cookbook.note_id = params[:note_id]
     end
     @cookbook.save
-    redirect '/cookbooks'
+    redirect '/cookbooks/cookbooks'
   end
 
   # delete a specific cookbook from all cookbooks
@@ -56,7 +56,7 @@ class CookbooksController < ApplicationController
     if current_user.id == @cookbook.user_id
       @cookbook.delete
     end
-    redirect '/cookbooks'
+    redirect '/cookbooks/cookbooks'
   end
 
 end
