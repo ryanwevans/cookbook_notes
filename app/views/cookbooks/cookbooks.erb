@@ -1,1 +1,7 @@
-<h2>Welcome to the User Cookbooks Page!</h2>
+<h2>Welcome to Your Cookbooks Page!</h2>
+<br>
+<h4>Here are all of your cookbooks:</h4>
+<br>
+<% @cookbooks.each do |cookbook| %>
+  <a href="/cookbooks/<%= cookbook.id %>"><% cookbook.cookbook_name %></a><br>
+<% end %>
