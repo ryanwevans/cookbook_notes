@@ -3,5 +3,6 @@
 <h4>Here are all of your cookbooks:</h4>
 <br>
 <% @cookbooks.each do |cookbook| %>
-  <a href="/cookbooks/<%= cookbook.id %>"><% cookbook.cookbook_name %></a><br>
+  <i><a href="/cookbooks/<%= cookbook.id %>"><% cookbook.cookbook_name %></a></i>
+  <br>
 <% end %>
