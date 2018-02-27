@@ -1,0 +1,7 @@
+<h2>Edit a Cookbook</h2>
+
+<form action="/cookbooks/<%= @cookbook.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="text" name="cookbook_name" value="<%= @cookbook.cookbook_name %>"><%= @cookbook.cookbook_name %></input>
+  <button type="submit" name="submit">Update</button>
+</form>

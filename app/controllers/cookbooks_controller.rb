@@ -2,7 +2,9 @@ class CookbooksController < ApplicationController
 
   # view all cookbooks
   get '/cookbooks' do
-    # redirect_unless_logged_in
+    redirect_unless_logged_in
+    @user = User.find(params[:id])
+    @cookbooks = @user.cookbooks.all
     erb :'/cookbooks/cookbooks'
   end
 
@@ -10,6 +12,7 @@ class CookbooksController < ApplicationController
   get '/cookbooks/:id' do
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
+    @cookbook_notes = @cookbook.notes.all
     erb :'/cookbooks/show_cookbook'
   end
 
