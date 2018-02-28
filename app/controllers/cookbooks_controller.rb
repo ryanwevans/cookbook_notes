@@ -3,7 +3,7 @@ class CookbooksController < ApplicationController
   # view all cookbooks
   get '/cookbooks' do
     redirect_unless_logged_in
-    @user = User.find(params[:id])
+    @user = User.find_by(id: session[:id])
     @cookbooks = @user.cookbooks.all
     erb :'/cookbooks/cookbooks'
   end
@@ -11,7 +11,7 @@ class CookbooksController < ApplicationController
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
-    @cookbook = Cookbook.find(params[:id])
+    @cookbook = Cookbook.find_by(id: params[:id])
     @cookbook_notes = @cookbook.notes.all
     erb :'/cookbooks/show_cookbook'
   end
@@ -31,7 +31,7 @@ class CookbooksController < ApplicationController
     end
     @cookbook.user_id = current_user.id
     @cookbook.save
-    redirect '/cookbooks/cookbooks'
+    redirect '/cookbooks'
   end
 
   # view form to edit a specific cookbook
