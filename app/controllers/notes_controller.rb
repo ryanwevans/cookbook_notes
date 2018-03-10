@@ -3,13 +3,16 @@ class NotesController < ApplicationController
     # view all notes
     get '/notes' do
       redirect_unless_logged_in
-      erb ':/notes/notes'
+      @user = User.find_by(id: session[:id])
+      @notes = @user.notes.all
+      @cookbooks = @user.cookbooks.all
+      erb :'/notes/notes'
     end
 
     # view form to create new note
     get '/notes/new' do
       redirect_unless_logged_in
-      erb ':/notes/create_note'
+      erb :'/notes/create_note'
     end
 
     # post new note from form to db of all notes
@@ -27,14 +30,15 @@ class NotesController < ApplicationController
     # view form to edit a specific note
     get '/notes/:id/edit' do
       redirect_unless_logged_in
-      erb ':/notes/edit_note'
+      @cookbook = Cookbook.find_by(id: params[:cookbook_id])
+      erb :'/notes/edit_note'
     end
 
     # view a specific note
     get '/notes/:id' do
       redirect_unless_logged_in
       @note = Note.find(params[:id])
-      erb ':/notes/show_note'
+      erb :'/notes/show_note'
     end
 
     # patch updated note info from edit form to specific note
