@@ -1,7 +1,10 @@
 <h2><%= @cookbook.cookbook_name %></h2>
 
+<a href="/notes">Add a Note</a>
+<br>
 <% @cookbook.notes.each do |note| %>
   <%= note.content %>
   <a href="/notes/<%= note.id %>">Edit This Note</a>
   <br>
 <% end %>
+<a href="/cookbooks">Back to Cookbooks</a>
