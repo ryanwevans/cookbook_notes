@@ -6,13 +6,6 @@ class NotesController < ApplicationController
       erb ':/notes/notes'
     end
 
-    # view a specific note
-    get '/notes/:id' do
-      redirect_unless_logged_in
-      @note = Note.find(params[:id])
-      erb ':/notes/show_note'
-    end
-
     # view form to create new note
     get '/notes/new' do
       redirect_unless_logged_in
@@ -23,9 +16,9 @@ class NotesController < ApplicationController
     post '/notes' do
       redirect_unless_logged_in
       @note = Note.create(:content => params[:content])
-      if !params[:cookbook_id].empty?
-        @note.cookbook_id = params[:cookbook_id]
-      end
+      # if !params[:cookbook_id].empty?
+      #   @note.cookbook_id = params[:cookbook_id]
+      # end
       @note.user_id = current_user.id
       @note.save
       redirect '/notes'
@@ -37,14 +30,21 @@ class NotesController < ApplicationController
       erb ':/notes/edit_note'
     end
 
+    # view a specific note
+    get '/notes/:id' do
+      redirect_unless_logged_in
+      @note = Note.find(params[:id])
+      erb ':/notes/show_note'
+    end
+
     # patch updated note info from edit form to specific note
     patch '/notes/:id' do
       redirect_unless_logged_in
       @note = Note.find(params[:id])
       @note.content = params[:content]
-      if !params[:cookbook_id].empty?
-        @note.cookbook_id = params[:cookbook_id]
-      end
+      # if !params[:cookbook_id].empty?
+      #   @note.cookbook_id = params[:cookbook_id]
+      # end
       @note.save
       redirect '/notes'
     end
