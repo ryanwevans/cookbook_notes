@@ -8,14 +8,6 @@ class CookbooksController < ApplicationController
     erb :'/cookbooks/cookbooks'
   end
 
-  # view a specific cookbook
-  get '/cookbooks/:id' do
-    redirect_unless_logged_in
-    @cookbook = Cookbook.find_by(id: params[:id])
-    @cookbook_notes = @cookbook.notes.all
-    erb :'/cookbooks/show_cookbook'
-  end
-
   # view form to create new cookbook
   get '/cookbooks/new' do
     redirect_unless_logged_in
@@ -26,12 +18,16 @@ class CookbooksController < ApplicationController
   post '/cookbooks' do
     redirect_unless_logged_in
     @cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
-    if !params[:note_id].empty?
-      @cookbook.note_id = params[:note_id]
-    end
     @cookbook.user_id = current_user.id
     @cookbook.save
     redirect '/cookbooks'
+  end
+
+  # view a specific cookbook
+  get '/cookbooks/:id' do
+    redirect_unless_logged_in
+    @cookbook = Cookbook.find_by(id: params[:id])
+    erb :'/cookbooks/show_cookbook'
   end
 
   # view form to edit a specific cookbook
