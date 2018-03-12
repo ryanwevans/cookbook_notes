@@ -3,5 +3,11 @@
 <form action="/notes" method="post">
   <textarea name="notes[content]" rows="8" cols="80" placeholder="Enter your note here"></textarea>
   <br>
+  Choose a Cookbook to Attach This Note To:
+  <% Cookbook.all.each do |cookbook| %>
+    <label for="cookbook_name"><%= cookbook.cookbook_name %></label>
+    <input type="checkbox" name="note[cookbook_id]" id="<%= cookbook.id %>" value="<%= cookbook.id %>">
+  <% end %>
+
   <button type="submit" name="content">Create</button>
 </form>
