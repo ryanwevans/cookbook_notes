@@ -1,17 +1,7 @@
 <h2>Create a New Note</h2>
 
 <form action="/notes" method="post">
-  <textarea name="notes[content]" rows="8" cols="80" placeholder="Enter your note here"></textarea>
+  <textarea name="content" rows="8" cols="80" placeholder="Enter your note here"></textarea>
   <br>
-  <br>
-  Choose a Cookbook to Attach This Note To:
-  <% Cookbook.all.each do |cookbook| %>
-    <label for="cookbook_name"><%= cookbook.cookbook_name %></label>
-    <input type="checkbox" name="note[cookbook_id]" id="<%= cookbook.id %>" value="<%= cookbook.id %>">
-  <% end %>
-  -or-
-  Add a New Cookbook for this Note:
-  <label for="cookbook_name">Cookbook Name:</label><br>
-  <input type="text" name="cookbook[cookbook_name]" id="new_cookbook">
-  <button type="submit" name="content">Create</button>
+  <button type="submit" name="content">Create Note</button>
 </form>

@@ -4,8 +4,9 @@ class NotesController < ApplicationController
     get '/notes' do
       redirect_unless_logged_in
       @user = User.find_by(id: session[:id])
-      @notes = @user.notes.all
-      @cookbooks = @user.cookbooks.all
+      if @user.cookbook_id == Cookbook.id
+        @notes = @user.notes.all
+      @cookbook = Cookbook.all
       erb :'/notes/notes'
     end
 
@@ -16,26 +17,16 @@ class NotesController < ApplicationController
     end
 
     # post new note from form to db of all notes
-    # post '/notes' do
-    #   redirect_unless_logged_in
-    #   @note = Note.create(:content => params[:content])
-    #   # if !params[:cookbook_id].empty?
-    #   #   @note.cookbook_id = params[:cookbook_id]
-    #   # end
-    #   @note.user_id = current_user.id
-    #   @note.save
-    #   redirect '/notes'
-    # end
-
-    #post new note from form to db of all notes
     post '/notes' do
-    @note = Note.create(params["note"])
-    if !params[:cookbook][:cookbook_name].empty?
-      @note.cookbook << Cookbook.create(params[:cookbook])
+      redirect_unless_logged_in
+      @note = Note.create(:content => params[:content])
+      if !params[:cookbook_id].empty?
+        @note.cookbook_id = params[:cookbook_id]
+      end
+      @note.user_id = current_user.id
+      @note.save
+      redirect '/notes'
     end
-    @note.save
-    redirect to "/notes/#{@note.id}"
-  end
 
     # view form to edit a specific note
     get '/notes/:id/edit' do

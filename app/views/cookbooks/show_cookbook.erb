@@ -1,14 +1,16 @@
 <h2><%= @cookbook.cookbook_name %></h2>
 
 <form action="/notes/new" method="get">
-  <button type="submit">Add a Note</button>
+  <button type="submit">Add a New Note</button>
 </form>
 <br>
-<% @cookbook.notes.each do |note| %>
+<form action="/cookbooks" method="get">
+  <button type="submit">Back to Cookbooks</button>
+</form>
+<br>
+<h4>Here are your notes for this cookbook:</h4>
+<% @notes.each do |note| %>
   <%= note.content %>
   <a href="/notes/<%= note.id %>/edit">Edit This Note</a>
   <br>
 <% end %>
-<form action="/cookbooks" method="get">
-  <button type="submit">Back to Cookbooks</button>
-</form>

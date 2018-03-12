@@ -27,6 +27,7 @@ class CookbooksController < ApplicationController
   get '/cookbooks/:id' do
     redirect_unless_logged_in
     @cookbook = Cookbook.find_by(id: params[:id])
+    @notes = @cookbook.notes.all
     erb :'/cookbooks/show_cookbook'
   end
 
