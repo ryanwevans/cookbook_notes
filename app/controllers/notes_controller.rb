@@ -16,16 +16,26 @@ class NotesController < ApplicationController
     end
 
     # post new note from form to db of all notes
+    # post '/notes' do
+    #   redirect_unless_logged_in
+    #   @note = Note.create(:content => params[:content])
+    #   # if !params[:cookbook_id].empty?
+    #   #   @note.cookbook_id = params[:cookbook_id]
+    #   # end
+    #   @note.user_id = current_user.id
+    #   @note.save
+    #   redirect '/notes'
+    # end
+
+    #post new note from form to db of all notes
     post '/notes' do
-      redirect_unless_logged_in
-      @note = Note.create(:content => params[:content])
-      # if !params[:cookbook_id].empty?
-      #   @note.cookbook_id = params[:cookbook_id]
-      # end
-      @note.user_id = current_user.id
-      @note.save
-      redirect '/notes'
+    @note = Note.create(params["note"])
+    if !params[:cookbook][:cookbook_name].empty?
+      @note.cookbook << Cookbook.create(params[:cookbook])
     end
+    @note.save
+    redirect to "/notes/#{@note.id}"
+  end
 
     # view form to edit a specific note
     get '/notes/:id/edit' do
