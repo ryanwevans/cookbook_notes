@@ -1,3 +1,8 @@
 <h2>Edit Cookbook Note</h2>
+<form class="" action="/notes/<%= @note_id %>" method="post">
+  <input type="hidden" name="method" value="patch">
 
-<textarea name="note" rows="8" cols="80" placeholder="<%=  %>"></textarea>
+  <textarea name="note" rows="8" cols="80" placeholder="<%= @note.content %>"></textarea>
+
+  <input type="submit" value="Save Changes">
+</form>
