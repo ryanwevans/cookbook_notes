@@ -5,8 +5,8 @@
 </form>
 <br>
 <h4>Here are your notes for this cookbook:</h4>
+<br>
 <% @notes.each do |note| %>
-  <%= note.content %>
-  <a href="/notes/<%= note.id %>/edit">Edit This Note</a>
+  <li><%= note.content %></li>
   <br>
 <% end %>
