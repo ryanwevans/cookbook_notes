@@ -49,13 +49,13 @@ class NotesController < ApplicationController
     end
 
     # delete a specific note from all notes
-    delete '/notes/:id' do
+    delete '/notes/:id/delete' do
       redirect_unless_logged_in
       @note = Note.find(params[:id])
       if current_user.id == @note.user_id
         @note.delete
       end
-      redirect '/notes'
+      redirect "/cookbooks"
     end
 
 end
