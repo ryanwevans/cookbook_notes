@@ -52,9 +52,10 @@ class NotesController < ApplicationController
     delete '/notes/:id/delete' do
       redirect_unless_logged_in
       @note = Note.find(params[:id])
-      if current_user.id == @note.user_id
-        @note.delete
-      end
+      # if current_user.id == @note.user_id
+      #   @note.delete
+      # end
+      @note.delete
       redirect "/cookbooks"
     end
 
