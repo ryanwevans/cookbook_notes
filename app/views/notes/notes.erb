@@ -1,17 +1,24 @@
 <h2>Welcome to Your Notes Page</h2>
 <br>
-<h4>Here are all of your notes:</h4>
+<h3>Here are all of your notes:</h3>
+<br>
 <% @user.notes.each do |note| %>
-  <li><i><%= note.content %></i></li>
+  <% @note_cookbook = Cookbook.find_by(:id => note.cookbook_id) %>
+    <%= @note_cookbook.cookbook_name %><br>
+    <li><i><%= note.content %></i></li><br>
+
   <form action="/notes/<%= note.id %>/edit" method="get">
     <input type="submit" value="Edit This Note">
   </form>
+
   <form action="/notes/<%= note.id %>/delete" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete">
   </form>
   <br><br>
+
 <% end %>
+
 <br>
 <form action="/notes/new" method="get">
   <button type="submit">Add a New Note</button>
