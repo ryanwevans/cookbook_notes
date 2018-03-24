@@ -3,7 +3,8 @@ class CookbooksController < ApplicationController
   # view all cookbooks
   get '/cookbooks' do
     redirect_unless_logged_in
-    @user = User.find_by(id: session[:id])
+    # replace this: User.find_by(id: session[:id]) with: current_user
+    @user = current_user
     @cookbooks = @user.cookbooks.all
     erb :'/cookbooks/cookbooks'
   end
@@ -26,7 +27,8 @@ class CookbooksController < ApplicationController
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
-    @user = User.find_by(id: session[:id])
+    # replace this: User.find_by(id: session[:id]) with: current_user
+    @user = current_user
     @cookbook = Cookbook.find_by(id: params[:id])
     @notes = @cookbook.notes.all
     erb :'/cookbooks/show_cookbook'
