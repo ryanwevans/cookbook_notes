@@ -4,14 +4,16 @@ class NotesController < ApplicationController
     # view all notes
     get '/notes' do
       redirect_unless_logged_in
-      @user = User.find_by(id: session[:id])
+      # replace this: User.find_by(id: session[:id]) with: current_user
+      @user = current_user
       erb :'/notes/notes'
     end
 
     # view form to create new note
     get '/notes/new' do
       redirect_unless_logged_in
-      @user = User.find_by(id: session[:id])
+      # replace this: User.find_by(id: session[:id]) with: current_user
+      @user = current_user
       erb :'/notes/create_note'
     end
 
