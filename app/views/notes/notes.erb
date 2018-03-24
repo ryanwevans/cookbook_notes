@@ -2,10 +2,11 @@
 <br>
 <h3>Here are all of your notes:</h3>
 <br>
-<% @user.notes.each do |note| %>
-  <% @note_cookbook = Cookbook.find_by(:id => note.cookbook_id) %>
-    <%= @note_cookbook.cookbook_name %><br>
-    <li><i><%= note.content %></i></li><br>
+<% @user.cookbooks.each do |cookbook| %>
+  <%= cookbook.cookbook_name %>
+  <% cookbook.notes.each do |note| %>
+    <li><i><%= note.content %></i></li>
+    <br>
 
   <form action="/notes/<%= note.id %>/edit" method="get">
     <input type="submit" value="Edit This Note">
@@ -16,7 +17,7 @@
     <input type="submit" value="Delete">
   </form>
   <br><br>
-
+  <% end %>
 <% end %>
 
 <br>

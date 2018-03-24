@@ -6,6 +6,11 @@ class CookbooksController < ApplicationController
     # replace this: User.find_by(id: session[:id]) with: current_user
     @user = current_user
     @cookbooks = @user.cookbooks.all
+    if !@cookbooks.empty?
+      @message = "Here are all of your cookbooks:"
+    else
+      @message = "Add cookbooks to your list"
+    end
     erb :'/cookbooks/cookbooks'
   end
 

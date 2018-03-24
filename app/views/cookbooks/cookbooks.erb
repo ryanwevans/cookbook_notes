@@ -1,18 +1,22 @@
 <h2>Welcome to Your Cookbooks Page!</h2>
 <br>
-<h4>Here are all of your cookbooks:</h4>
+
+<h4><%= @message %></h4>
+
 <br>
-<% @cookbooks.each do |cookbook| %>
-  <i><a href="/cookbooks/<%= cookbook.id %>"><%= cookbook.cookbook_name %></a></i>
-  <br>
+<% if !@cookbooks.empty? %>
+  <% @cookbooks.each do |cookbook| %>
+    <i><a href="/cookbooks/<%= cookbook.id %>"><%= cookbook.cookbook_name %></a></i>
+    <br>
+  <% end %>
 <% end %>
 <br>
 <form action="/cookbooks/new" method="get">
   <button type="submit">Add a New Cookbook</button>
 </form>
-<form action="/notes/new" method="get">
+<!-- <form action="/notes/new" method="get">
   <button type="submit">Add a New Note</button>
-</form>
+</form> -->
 <form action="/notes" method="get">
   <button type="submit">View All Notes</button>
 </form>

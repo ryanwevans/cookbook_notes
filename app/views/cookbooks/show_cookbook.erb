@@ -1,23 +1,37 @@
-<h2><%= @cookbook.cookbook_name %></h2>
-
+<h2>'<%= @cookbook.cookbook_name %>'</h2>
+<%= @user.username %>
+<br><br>
 <h4>Here are your notes for <%= @cookbook.cookbook_name %>:</h4>
 
-<% @notes.each do |note| %>
-  <% if note.user_id == session[:id] %>
-    <li><%= note.content %></li>
+<% if !@cookbook.notes %>
+  <form action="/notes/new" method="get">
+    <input type="hidden" name="cookbook_id" value="<%= @cookbook.id %>">
+    <button type="submit">"Add a New Note"</button>
+  </form>
 
-    <form action="/notes/<%= note.id %>/edit" method="get">
-      <input type="submit" value="Edit This Note">
-    </form>
+<% else %>
+  <% @cookbook.notes.each do |note| %>
+    <% if note.user_id == session[:id] %>
+      <li><%= note.content %></li>
 
-    <form action="/notes/<%= note.id %>/delete" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete This Note">
-    </form>
+      <form action="/notes/<%= note.id %>/edit" method="get">
+        <input type="submit" value="Edit This Note">
+      </form>
 
-    <br><br>
-  <% end %>
+      <form action="/notes/<%= note.id %>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete This Note">
+      </form>
+      <% end %>
+    <% end %>
 <% end %>
+<br><br>
+
+<br><br>
+<form action="/cookbooks/<%= @cookbook.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Cookbook">
+</form>
 
 <form action="/cookbooks" method="get">
   <button type="submit">Back to Cookbooks</button>
