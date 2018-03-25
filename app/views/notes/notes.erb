@@ -2,7 +2,6 @@
 <h4>Here are all of your notes:</h4>
 
 <% @user.cookbooks.each do |cookbook| %>
-<br>
   <b><em><%= cookbook.cookbook_name if !cookbook.notes.empty? %></em></b>
     <% cookbook.notes.each do |note| %>
 
