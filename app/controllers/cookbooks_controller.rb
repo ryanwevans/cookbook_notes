@@ -42,6 +42,7 @@ class CookbooksController < ApplicationController
   # view form to edit a specific cookbook
   get '/cookbooks/:id/edit' do
     redirect_unless_logged_in
+    @cookbook = Cookbook.find(params[:id])
     erb :'/cookbooks/edit_cookbook'
   end
 
@@ -50,11 +51,8 @@ class CookbooksController < ApplicationController
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
     @cookbook.cookbook_name = params[:cookbook_name]
-    if !params[:note_id].empty?
-      @cookbook.note_id = params[:note_id]
-    end
     @cookbook.save
-    redirect '/cookbooks/cookbooks'
+    redirect '/cookbooks'
   end
 
   # delete a specific cookbook from all cookbooks
@@ -64,7 +62,7 @@ class CookbooksController < ApplicationController
     if current_user.id == @cookbook.user_id
       @cookbook.delete
     end
-    redirect '/cookbooks/cookbooks'
+    redirect '/cookbooks'
   end
 
 end

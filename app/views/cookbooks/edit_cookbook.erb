@@ -1,9 +1,12 @@
-<h2>Edit a Cookbook</h2>
+<h2>Edit '<%= @cookbook.cookbook_name %>'</h2>
 
 <form action="/cookbooks/<%= @cookbook.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <input type="text" name="cookbook_name" value="<%= @cookbook.cookbook_name %>"><%= @cookbook.cookbook_name %></input>
-  <button type="submit" name="submit">Update</button>
+  <label for="cookbook_name">Cookbook name:</label>
+  <br><br>
+  <textarea name="cookbook_name" value="<%= @cookbook.cookbook_name %>" rows="1" cols="50" contenteditable="true"><%= @cookbook.cookbook_name %></textarea>
+  <br><br>
+  <input type="submit" value="Update">
 </form>
 <form action="/cookbooks" method="get">
   <button type="submit">Cancel</button>

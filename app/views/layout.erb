@@ -8,11 +8,5 @@
     <%= yield %>
     <br>
     <br>
-    <!-- add code to remove 'logout' button on the sign up and log in page -->
-    <% if logged_in? %>
-      <form action="/logout" method="get">
-        <button type="submit" name="logout">Logout</button>
-      </form>
-    <% end %>
   </body>
 </html>

@@ -1,38 +1,40 @@
 <h2>'<%= @cookbook.cookbook_name %>'</h2>
-<%= @user.username %>
+~ <%= @user.username %>'s cookbooks ~
 <br><br>
-<h4>Here are your notes for <%= @cookbook.cookbook_name %>:</h4>
+<h4>Here are your notes for '<%= @cookbook.cookbook_name %>':</h4>
 
-<% if !@cookbook.notes %>
-  <form action="/notes/new" method="get">
-    <input type="hidden" name="cookbook_id" value="<%= @cookbook.id %>">
-    <button type="submit">"Add a New Note"</button>
-  </form>
+<% @cookbook.notes.each do |note| %>
+  <% if note.user_id == session[:id] %>
+    <li><%= note.content %></li>
 
-<% else %>
-  <% @cookbook.notes.each do |note| %>
-    <% if note.user_id == session[:id] %>
-      <li><%= note.content %></li>
+    <form action="/notes/<%= note.id %>/edit" method="get">
+      <input type="submit" value="Edit This Note">
+    </form>
 
-      <form action="/notes/<%= note.id %>/edit" method="get">
-        <input type="submit" value="Edit This Note">
-      </form>
-
-      <form action="/notes/<%= note.id %>/delete" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete This Note">
-      </form>
-      <% end %>
+    <form action="/notes/<%= note.id %>/delete" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete This Note">
+    </form>
+    <br>
     <% end %>
-<% end %>
+  <% end %>
 <br><br>
-
+<form action="/notes/new" method="get">
+  <input type="hidden" name="cookbook_id" value="<%= @cookbook.id %>">
+  <input type="submit" value="Add a New Note">
+</form>
 <br><br>
+<form action="/cookbooks/<%= @cookbook.id %>/edit" method="get">
+  <input type="submit" value="Edit This Cookbook">
+</form>
 <form action="/cookbooks/<%= @cookbook.id %>/delete" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Cookbook">
 </form>
-
+<br>
 <form action="/cookbooks" method="get">
-  <button type="submit">Back to Cookbooks</button>
+  <input type="submit" value="Back to Cookbooks List">
+</form>
+<form action="/logout" method="get">
+  <input type="submit" value="Logout">
 </form>
