@@ -1,26 +1,28 @@
 <h2>Welcome to Your Notes Page</h2>
 <h4>Here are all of your notes:</h4>
-<br>
+
 <% @user.cookbooks.each do |cookbook| %>
-  <b><em><%= cookbook.cookbook_name %></em></b>
-  <% cookbook.notes.each do |note| %>
-    <li><%= note.content %></li>
-    <br>
-  <form action="/notes/<%= note.id %>/edit" method="get">
-    <input type="submit" value="Edit This Note">
-  </form>
-  <form action="/notes/<%= note.id %>/delete" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete">
-  </form>
-  <br><br>
+<br>
+  <b><em><%= cookbook.cookbook_name if !cookbook.notes.empty? %></em></b>
+    <% cookbook.notes.each do |note| %>
+
+      <li><%= note.content %></li>
+
+      <form action="/notes/<%= note.id %>/edit" method="get">
+        <input type="submit" value="Edit This Note">
+      </form>
+
+      <form action="/notes/<%= note.id %>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
+      <br>
   <% end %>
-  <br><br>
 <% end %>
 <br>
 <form action="/cookbooks" method="get">
   <input type="submit" value="Back to Cookbooks">
 </form>
 <form action="/logout" method="get">
-  <button type="submit" name="logout">Logout</button>
+  <input type="submit" value="Logout">
 </form>
