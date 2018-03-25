@@ -2,18 +2,8 @@
 
 <form action="/notes" method="post">
   <label for="content">Content:</label><br>
-  <textarea name="note[content]" rows="8" cols="80"></textarea>
+  <textarea name="note[content]" rows="8" cols="80" autofocus></textarea>
   <br>
-
-  <!-- <h4>Choose a Cookbook for this Note:</h4>
-  <% Cookbook.all.each do |cookbook| %>
-    <input type="checkbox" name="note[cookbook_id]" value="<%= cookbook.id %>"><label for="cookbook_name"><%= cookbook.cookbook_name %></label>
-    <br>
-  <% end %>
-  <br> -->
   <input type="hidden" name="note[cookbook_id]" value="<%= @cookbook.id %>">
-
-  <!-- <input type="hidden" name="note[user_id]" value="<%= @cookbook.user_id %>"> -->
-
   <input type="submit" value="Save New Note">
 </form>
