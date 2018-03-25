@@ -2,11 +2,11 @@
 <h4>Please enter a username, email and password:</h4>
 
 <form action="/signup" method="post" autocomplete="off">
-  <label>Username:</label><input type="text" name="username" autofocus>
+  <label>Username:</label><input type="text" name="username" autofocus required>
   <br>
-  <label>Email:</label><input type="text" name="email">
+  <label>Email:</label><input type="text" name="email" required>
   <br>
-  <label>Password:</label><input type="password" name="password">
+  <label>Password:</label><input type="password" name="password" required>
   <br>
   <br>
   <input type="submit" name="submit">
