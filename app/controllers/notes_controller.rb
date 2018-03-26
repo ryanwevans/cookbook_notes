@@ -4,7 +4,6 @@ class NotesController < ApplicationController
     # view all notes
     get '/notes' do
       redirect_unless_logged_in
-      # replace this: User.find_by(id: session[:id]) with: current_user
       @user = current_user
       erb :'/notes/notes'
     end
@@ -12,10 +11,7 @@ class NotesController < ApplicationController
     # view form to create new note
     get '/notes/new' do
       redirect_unless_logged_in
-      # replace this: User.find_by(id: session[:id]) with: current_user
       @cookbook = Cookbook.find_by(id: params[:cookbook_id])
-      # @cookbook_name = @cookbook.cookbook_name
-      # @cookbook_id = params[:cookbook_id]
       @user = current_user
       erb :'/notes/create_note'
     end
@@ -25,7 +21,6 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @note = Note.create(params[:note])
       @note.user_id = current_user.id
-      # @note.cookbook_id = @cookbook.id
       @note.save
       redirect '/cookbooks'
     end
@@ -49,9 +44,6 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
       @note.update(content: params[:content])
-      # if !params[:cookbook_id].empty?
-      #   @note.cookbook_id = params[:cookbook_id]
-      # end
       @note.save
       redirect "/notes"
     end

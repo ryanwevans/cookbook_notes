@@ -3,7 +3,6 @@ class CookbooksController < ApplicationController
   # view all cookbooks
   get '/cookbooks' do
     redirect_unless_logged_in
-    # replace this: User.find_by(id: session[:id]) with: current_user
     @user = current_user
     @cookbooks = @user.cookbooks.all
     if !@cookbooks.empty?
@@ -32,7 +31,6 @@ class CookbooksController < ApplicationController
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
-    # replace this: User.find_by(id: session[:id]) with: current_user
     @user = current_user
     @cookbook = Cookbook.find_by(id: params[:id])
     @notes = @cookbook.notes.all
@@ -46,7 +44,7 @@ class CookbooksController < ApplicationController
     erb :'/cookbooks/edit_cookbook'
   end
 
-  # patch updated cookbook info from edit form to specific cookbook
+  # update cookbook info from edit form to specific cookbook
   patch '/cookbooks/:id' do
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
