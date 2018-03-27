@@ -19,10 +19,14 @@ class NotesController < ApplicationController
     # post new note from form to db of all notes
     post '/notes' do
       redirect_unless_logged_in
-      @note = Note.create(params[:note])
-      @note.user_id = current_user.id
-      @note.save
-      redirect '/cookbooks'
+      if params[:note][:content] == ""
+        raise "Your note cannot be empty!"
+      else
+        @note = Note.create(params[:note])
+        @note.user_id = current_user.id
+        @note.save
+        redirect '/cookbooks'
+      end
     end
 
     # view form to edit a specific note
