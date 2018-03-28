@@ -20,7 +20,7 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       if params[:note][:content] == ""
         flash[:message] = "Your note cannot be empty!"
-        redirect '/notes/new'
+        redirect '/cookbooks'
       else
         @note = Note.create(params[:note])
         @note.user_id = current_user.id
