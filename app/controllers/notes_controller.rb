@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+    use Rack::Flash
 
     get '/notes' do
       redirect_unless_logged_in
