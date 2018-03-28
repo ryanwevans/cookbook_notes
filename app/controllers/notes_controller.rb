@@ -1,7 +1,5 @@
 class NotesController < ApplicationController
 
-# This may not be needed
-    # view all notes
     get '/notes' do
       redirect_unless_logged_in
       @user = current_user
@@ -20,7 +18,8 @@ class NotesController < ApplicationController
     post '/notes' do
       redirect_unless_logged_in
       if params[:note][:content] == ""
-        raise "Your note cannot be empty!"
+        flash[:message] = "Your note cannot be empty!"
+        redirect '/notes/new'
       else
         @note = Note.create(params[:note])
         @note.user_id = current_user.id
