@@ -17,5 +17,6 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'slugify'
+gem 'rack-flash3'
 
 # gem "rails"
