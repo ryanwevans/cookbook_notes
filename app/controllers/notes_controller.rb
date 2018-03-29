@@ -42,8 +42,8 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
       if @note.content == params[:content]
-        session[:error_message] = "Nothing was changed..."
-        redirect '/cookbooks'
+        session[:error_message] = "* * * Your Update Didn't Contain Any Changes * * *"
+        redirect "/cookbooks/#{@note.cookbook_id}"
       else
         @note.update(content: params[:content])
         @note.save

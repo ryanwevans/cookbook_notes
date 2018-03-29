@@ -3,8 +3,6 @@ class CookbooksController < ApplicationController
   # view all cookbooks
   get '/cookbooks' do
     redirect_unless_logged_in
-    @error_message = session[:error_message]
-    session[:error_message] = nil
     @user = current_user
     @cookbooks = @user.cookbooks.all
     if !@cookbooks.empty?
@@ -33,6 +31,8 @@ class CookbooksController < ApplicationController
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
+    @error_message = session[:error_message]
+    session[:error_message] = nil
     @user = current_user
     @cookbook = Cookbook.find_by(id: params[:id])
     @notes = @cookbook.notes.all
