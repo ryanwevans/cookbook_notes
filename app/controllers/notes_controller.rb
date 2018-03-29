@@ -1,5 +1,4 @@
 class NotesController < ApplicationController
-    use Rack::Flash
 
     get '/notes' do
       redirect_unless_logged_in
@@ -43,7 +42,7 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
       if @note.content == params[:content]
-        flash[:message] = "Nothing was changed..."
+        session[:error_message] = "Nothing was changed..."
         redirect '/cookbooks'
       else
         @note.update(content: params[:content])

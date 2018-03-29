@@ -1,8 +1,8 @@
-<% if flash(:message) %>
-  <%= flash[:message] %>
-<% end %>
 <h2>Welcome to Your Cookbooks Page!</h2>
 <br>
+<% if @error_message %>
+<%= @error_message %>
+<% end %>
 
 <h4><%= @message %></h4>
 
