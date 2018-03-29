@@ -18,15 +18,10 @@ class NotesController < ApplicationController
     # post new note from form to db of all notes
     post '/notes' do
       redirect_unless_logged_in
-      if params[:note][:content] == ""
-        flash[:message] = "Your note cannot be empty!"
-        redirect '/cookbooks'
-      else
-        @note = Note.create(params[:note])
-        @note.user_id = current_user.id
-        @note.save
-        redirect '/cookbooks'
-      end
+      @note = Note.create(params[:note])
+      @note.user_id = current_user.id
+      @note.save
+      redirect '/cookbooks'
     end
 
     # view form to edit a specific note
@@ -47,9 +42,14 @@ class NotesController < ApplicationController
     post '/notes/:id' do
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
-      @note.update(content: params[:content])
-      @note.save
-      redirect "/notes"
+      if @note.content == params[:content]
+        flash[:message] = "Nothing was changed..."
+        redirect '/cookbooks'
+      else
+        @note.update(content: params[:content])
+        @note.save
+        redirect "/notes"
+      end
     end
 
     # delete a specific note from all notes
