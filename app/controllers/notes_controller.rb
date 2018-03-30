@@ -33,14 +33,22 @@ class NotesController < ApplicationController
     get '/notes/:id/edit' do
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
-      erb :'/notes/edit_note'
+      if current_user.id == @note.user_id
+        erb :'/notes/edit_note'
+      else
+        redirect '/login'
+      end
     end
 
     # view a specific note
     get '/notes/:id' do
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
-      erb :'/notes/show_note'
+      if current_user.id == @note.user_id
+        erb :'/notes/show_note'
+      else
+        redirect '/login'
+      end
     end
 
     # patch updated note info from edit form to specific note

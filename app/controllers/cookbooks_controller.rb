@@ -36,14 +36,22 @@ class CookbooksController < ApplicationController
     @user = current_user
     @cookbook = Cookbook.find_by(id: params[:id])
     @notes = @cookbook.notes.all
-    erb :'/cookbooks/show_cookbook'
+    if current_user.id == @cookbook.user_id
+      erb :'/cookbooks/show_cookbook'
+    else
+      redirect '/login'
+    end
   end
 
   # view form to edit a specific cookbook
   get '/cookbooks/:id/edit' do
     redirect_unless_logged_in
     @cookbook = Cookbook.find(params[:id])
-    erb :'/cookbooks/edit_cookbook'
+    if current_user.id == @cookbook.user_id
+      erb :'/cookbooks/edit_cookbook'
+    else
+      redirect '/login'
+    end
   end
 
   # update cookbook info from edit form to specific cookbook
