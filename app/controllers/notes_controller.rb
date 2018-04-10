@@ -25,7 +25,7 @@ class NotesController < ApplicationController
         @note = Note.create(params[:note])
         @note.user_id = current_user.id
         @note.save
-        redirect '/cookbooks'
+        redirect "/cookbooks/#{@cookbook_id}"
       end
     end
 
@@ -61,7 +61,7 @@ class NotesController < ApplicationController
       else
         @note.update(content: params[:content])
         @note.save
-        redirect "/notes"
+        redirect "/cookbooks/#{@note.cookbook_id}"
       end
     end
 
@@ -73,7 +73,7 @@ class NotesController < ApplicationController
         @note.delete
       end
       @note.delete
-      redirect "/cookbooks"
+      redirect "/cookbooks/#{@note.cookbook_id}"
     end
 
 end
