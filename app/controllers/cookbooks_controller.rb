@@ -3,8 +3,7 @@ class CookbooksController < ApplicationController
   # view all cookbooks
   get '/cookbooks' do
     redirect_unless_logged_in
-    @user = current_user
-    @cookbooks = @user.cookbooks.all
+    @cookbooks = current_user.cookbooks
     if !@cookbooks.empty?
       @message = "Here are all of your cookbooks:"
     else
@@ -22,19 +21,20 @@ class CookbooksController < ApplicationController
   # post new cookbook from form to db of all cookbooks
   post '/cookbooks' do
     redirect_unless_logged_in
-    @cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
-    @cookbook.user_id = current_user.id
-    @cookbook.save
+    #@cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
+    #@cookbook.user_id = current_user.id
+    current_user.create_cookbook(:cookbook_name => params[:cookbook_name])
+    #@cookbook.save
     redirect '/cookbooks'
   end
 
   # view a specific cookbook
   get '/cookbooks/:id' do
     redirect_unless_logged_in
-    @error_message = session[:error_message]
-    session[:error_message] = nil
+    @error_message = flash[:message]
+    flash[:message] = nil
     @user = current_user
-    @cookbook = Cookbook.find_by(id: params[:id])
+    @cookbook = Cookbook.find(params[:id])
     @notes = @cookbook.notes.all
     if current_user.id == @cookbook.user_id
       erb :'/cookbooks/show_cookbook'

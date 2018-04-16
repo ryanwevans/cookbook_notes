@@ -19,7 +19,7 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @cookbook_id = params[:note][:cookbook_id]
       if params[:note][:content] == ""
-        session[:error_message] = "* * * Your Note Didn't Contain Any Content * * *"
+        flash[:error_message] = "* * * Your Note Didn't Contain Any Content * * *"
         redirect "/cookbooks/#{@cookbook_id}"
       else
         @note = Note.create(params[:note])
@@ -56,7 +56,7 @@ class NotesController < ApplicationController
       redirect_unless_logged_in
       @note = Note.find_by(id: params[:id])
       if @note.content == params[:content]
-        session[:error_message] = "* * * Your Update Didn't Contain Any Changes * * *"
+        flash[:error_message] = "* * * Your Update Didn't Contain Any Changes * * *"
         redirect "/cookbooks/#{@note.cookbook_id}"
       else
         @note.update(content: params[:content])
