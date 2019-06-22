@@ -1,4 +1,4 @@
-## COOKBOOK NOTES
+# COOKBOOK NOTES
 
 
 ## Description
@@ -9,11 +9,10 @@ Cookbook Notes is an app to keep track of all your notes for your recipes. Creat
 
 To run Cookbook Notes:
   1. Clone this repository
-  2. Run 'rake db:migrate' in your terminal
-  3. Run 'shotgun' in your terminal
-  4. Copy the server web address run by shotgun
-  5. Paste the address into your web browser, and hit <enter>.
-  6. You are now running the Cookbook Notes app.
+  2. Run `rake db:migrate` in your terminal
+  3. Run `shotgun` in your terminal
+  4. Copy/paste the server address run by shotgun into your web browser
+  5. You are now running the Cookbook Notes app!
 
 ## Contributing
 
