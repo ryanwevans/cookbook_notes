@@ -21,10 +21,10 @@ class CookbooksController < ApplicationController
   # post new cookbook from form to db of all cookbooks
   post '/cookbooks' do
     redirect_unless_logged_in
-    #@cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
-    #@cookbook.user_id = current_user.id
-    current_user.create_cookbook(:cookbook_name => params[:cookbook_name])
-    #@cookbook.save
+    @cookbook = Cookbook.create(:cookbook_name => params[:cookbook_name])
+    @cookbook.user_id = current_user.id
+    # current_user.create_cookbook(:cookbook_name => params[:cookbook_name])
+    @cookbook.save
     redirect '/cookbooks'
   end
 

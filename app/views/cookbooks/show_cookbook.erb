@@ -1,5 +1,5 @@
-<h2>'<%= @cookbook.cookbook_name %>'</h2>
-~ <%= @user.username %>'s cookbooks ~
+<h2><%= @cookbook.cookbook_name %></h2>
+~ <%= @user.username %>'s cookbook ~
 <br><br>
 
 <% if @error_message %>
@@ -9,40 +9,49 @@
 <% end %>
 
 <br>
-<h4>Here are your notes for '<%= @cookbook.cookbook_name %>':</h4>
+<h4>Here are your notes for <%= @cookbook.cookbook_name %>:</h4>
 
+<form action="/notes/new" method="get">
+  <input type="hidden" name="cookbook_id" value="<%= @cookbook.id %>">
+  <input type="submit" value="Add a New Note" style="background:none; border:none; color:inherit">
+</form>
+
+<br><br>
 <% @cookbook.notes.each do |note| %>
   <% if note.user_id == session[:id] %>
-    <li><%= note.content %></li>
-
-    <form action="/notes/<%= note.id %>/edit" method="get">
-      <input type="submit" value="Edit This Note">
+    <div style="width:60%; display:inline-block">
+      <ul style="list-style-type:none; padding-left:0pt">
+        <li style="text-align:left"><%= note.content %></li>
+      </ul>
+    </div>
+    <br>
+    <div>
+    <form action="/notes/<%= note.id %>/edit" method="get" style="display:inline">
+      <input type="submit" value="Edit This Note" style="background:none; border:none; color:inherit">
     </form>
 
-    <form action="/notes/<%= note.id %>/delete" method="post">
+    <form action="/notes/<%= note.id %>/delete" method="post" style="display:inline">
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete This Note">
+      <input type="submit" value="Delete This Note" style="background:none; border:none; color:inherit">
     </form>
+    </div>
     <br>
     <% end %>
   <% end %>
 <br><br>
-<form action="/notes/new" method="get">
-  <input type="hidden" name="cookbook_id" value="<%= @cookbook.id %>">
-  <input type="submit" value="Add a New Note">
-</form>
 <br><br>
-<form action="/cookbooks/<%= @cookbook.id %>/edit" method="get">
-  <input type="submit" value="Edit This Cookbook">
+<form action="/cookbooks/<%= @cookbook.id %>/edit" method="get" style="display:inline">
+  <input type="submit" value="Edit This Cookbook" style="background:none; border:none; color:inherit">
 </form>
-<form action="/cookbooks/<%= @cookbook.id %>/delete" method="post">
+<form action="/cookbooks/<%= @cookbook.id %>/delete" method="post" style="display:inline">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Cookbook">
+  <input type="submit" value="Delete Cookbook" style="background:none; border:none; color:inherit">
 </form>
 <br>
 <form action="/cookbooks" method="get">
-  <input type="submit" value="Back to Cookbooks List">
+  <input type="submit" value="Back to Cookbooks List" style="background:none; border:none; color:inherit">
 </form>
+<br>
 <form action="/logout" method="get">
-  <input type="submit" value="Logout">
+  <input type="submit" value="Logout" style="background:none; border:none; color:inherit; font-style:italic"">
 </form>

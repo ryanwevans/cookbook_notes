@@ -6,17 +6,22 @@
 <br>
 <% if !@cookbooks.empty? %>
   <% @cookbooks.each do |cookbook| %>
-    <i><a href="/cookbooks/<%= cookbook.id %>"><%= cookbook.cookbook_name %></a></i>
-    <br>
+    <i><a href="/cookbooks/<%= cookbook.id %>" style="color:inherit; text-decoration:none"><%= cookbook.cookbook_name %></a></i>
+    <br><br>
   <% end %>
 <% end %>
 <br>
-<form action="/cookbooks/new" method="get">
-  <button type="submit">Add a New Cookbook</button>
-</form>
-<form action="/notes" method="get">
-  <button type="submit">View All Notes</button>
-</form>
-<form action="/logout" method="get">
-  <button type="submit" name="logout">Logout</button>
-</form>
+<br>
+<br>
+<div>
+  <form action="/cookbooks/new" method="get">
+    <button type="submit" style="background:none; border:none; color:inherit">Add a New Cookbook</button>
+  </form>
+  <form action="/notes" method="get">
+    <button type="submit" style="background:none; border:none; color:inherit">View All Notes</button>
+  </form>
+  <br>
+  <form action="/logout" method="get">
+    <button type="submit" name="logout" style="background:none; border:none; color:inherit; font-style:italic">Logout</button>
+  </form>
+</div>

@@ -4,26 +4,33 @@
 <h4>Here are all of your notes:</h4>
 
 <% @user.cookbooks.each do |cookbook| %>
+  <br><br>
   <b><em><%= cookbook.cookbook_name if !cookbook.notes.empty? %></em></b>
+  <br>
     <% cookbook.notes.each do |note| %>
-
-      <li><%= note.content %></li>
-
-      <form action="/notes/<%= note.id %>/edit" method="get">
-        <input type="submit" value="Edit This Note">
+      <div style="width:60%; display:inline-block">
+        <ul style="list-style-type:none; padding-left:0pt">
+          <li style="text-align:left"><%= note.content %></li>
+        </ul>
+      </div>
+      <div>
+      <form action="/notes/<%= note.id %>/edit" method="get" style="display:inline">
+        <input type="submit" value="Edit This Note" style="background:none; border:none; color:inherit; display:inline">
       </form>
 
-      <form action="/notes/<%= note.id %>/delete" method="post">
+      <form action="/notes/<%= note.id %>/delete" method="post" style="display:inline">
         <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete" style="background:none; border:none; color:inherit; display:inline">
       </form>
+      </div>
       <br>
   <% end %>
 <% end %>
 <br>
 <form action="/cookbooks" method="get">
-  <input type="submit" value="Back to Cookbooks">
+  <input type="submit" value="Back to Cookbooks" style="background:none; border:none; color:inherit">
 </form>
+<br>
 <form action="/logout" method="get">
-  <input type="submit" value="Logout">
+  <input type="submit" value="Logout" style="background:none; border:none; color:inherit; font-style:italic">
 </form>

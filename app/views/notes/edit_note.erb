@@ -1,7 +1,7 @@
 <h2>Edit Cookbook Note</h2>
 <form action="/notes/<%= @note.id %>" method="post">
 
-  <textarea name="content" rows="8" cols="80" contenteditable="true" autofocus><%= @note.content %></textarea>
-
-  <input type="submit" value="Save Changes">
+  <textarea name="content" rows="8" cols="80" contenteditable="true" style="background-color:#b5b1b1" autofocus><%= @note.content %></textarea>
+  <br>
+  <input type="submit" value="Save Changes" style="background:none; border:none; color:inherit">
 </form>

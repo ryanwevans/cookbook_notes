@@ -4,10 +4,10 @@
   <input type="hidden" name="_method" value="patch">
   <label for="cookbook_name">Cookbook name:</label>
   <br><br>
-  <textarea name="cookbook_name" value="<%= @cookbook.cookbook_name %>" size="50" contenteditable="true" autofocus><%= @cookbook.cookbook_name %></textarea>
+  <textarea name="cookbook_name" value="<%= @cookbook.cookbook_name %>" size="50" contenteditable="true" style="background-color:#b5b1b1" autofocus><%= @cookbook.cookbook_name %></textarea>
   <br><br>
-  <input type="submit" value="Update">
+  <input type="submit" value="Update" style="background:none; border:none; color:inherit">
 </form>
 <form action="/cookbooks" method="get">
-  <input type="submit" value="Cancel">
+  <input type="submit" value="Cancel" style="background:none; border:none; color:inherit">
 </form>

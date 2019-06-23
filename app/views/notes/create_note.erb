@@ -1,9 +1,10 @@
 <h2>Create a New Note for '<%= @cookbook.cookbook_name %>'</h2>
 
 <form action="/notes" method="post">
-  <label for="content">Content:</label><br>
-  <textarea name="note[content]" rows="8" cols="80" autofocus></textarea>
+  <label for="content">Content:</label>
+  <br>
+  <textarea name="note[content]" rows="8" cols="80" style="background-color:#b5b1b1" autofocus></textarea>
   <br>
   <input type="hidden" name="note[cookbook_id]" value="<%= @cookbook.id %>">
-  <input type="submit" value="Save New Note">
+  <input type="submit" value="Save New Note" style="background:none; border:none; color:inherit">
 </form>
